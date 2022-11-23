@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.van.im.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="tech.van.im.entity.User">
+        <id column="user_id" jdbcType="BIGINT" javaType="Long" property="userId"/>
+        <result column="user_password" jdbcType="VARCHAR" javaType="String" property="userPassword"/>
+        <result column="user_salt" jdbcType="VARCHAR" javaType="String" property="userSalt"/>
+        <result column="user_email" jdbcType="VARCHAR" javaType="String" property="userEmail"/>
+        <result column="user_displayName" jdbcType="VARCHAR" javaType="String" property="userDisplayName"/>
+        <result column="user_add_time" jdbcType="TIMESTAMP" javaType="Date" property="userAddTime"/>
+        <result column="user_update_time" jdbcType="TIMESTAMP" javaType="Date" property="userUpdateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        user_id, user_password, user_salt, user_email, user_displayName, user_add_time, user_update_time
+    </sql>
+
+    <insert id="save" parameterType="tech.van.im.entity.User">
+        insert into tb_user (user_password,user_salt,user_email,user_displayName)
+        values (#{userPassword},#{userSalt},#{userEmail},#{userDisplayName})
+    </insert>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column"/>
+        from tb_user
+    </select>
+
+    <delete id="delete" parameterType="String">
+        delete from tb_user where user_displayName = #{userDisplayName}
+    </delete>
+</mapper>
