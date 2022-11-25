@@ -23,6 +23,7 @@
 			<version>2.2.2</version>
 		</dependency>
 
+		<!--数据库及连接池-依赖-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
@@ -31,6 +32,13 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!--通讯协议protocol buffers引入-->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.20.1</version>
 		</dependency>
 
 		<dependency>

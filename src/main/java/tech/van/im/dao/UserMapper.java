@@ -1,4 +1,4 @@
-package tech.van.im.mapper;
+package tech.van.im.dao;
 
 import tech.van.im.entity.User;
 
