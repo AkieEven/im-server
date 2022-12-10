@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Friendship {
-    private Long friendshipId;
     private Long friendshipOwnerId;
     private Long friendshipFriendId;
     private String friendshipName;

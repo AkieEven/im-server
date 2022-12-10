@@ -27,7 +27,19 @@
         from tb_user
     </select>
 
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        select <include refid="Base_Column"/>
+        from tb_user
+        where user_email = #{userEmail};
+    </select>
+
     <delete id="delete" parameterType="String">
         delete from tb_user where user_displayName = #{userDisplayName}
     </delete>
+
+    <select id="selectNameById" parameterType="java.lang.Long" resultType="java.lang.String">
+        select user_displayName
+        from tb_user
+        where user_id = #{userId}
+    </select>
 </mapper>

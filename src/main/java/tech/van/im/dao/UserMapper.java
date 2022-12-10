@@ -8,4 +8,8 @@ public interface UserMapper {
     int save(User user);
     List<User> findAll();
     int delete(String userDisplayName);
+
+    User selectByEmail(String userEmail);
+
+    String selectNameById(Long userId);
 }

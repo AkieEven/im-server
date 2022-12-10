@@ -45,7 +45,7 @@ class UserMapperTest {
     @Order(3)
     @Test
     void delete() {
-        assert 0 != userMapper.delete("test");
+        assert 0 != userMapper.delete("1");
         log.info("delete() test success");
     }
 }

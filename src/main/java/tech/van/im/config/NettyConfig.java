@@ -12,7 +12,7 @@ public class NettyConfig {
     /**
      * boss线程数，如不设置，Netty框架中默认为2*CPU
      */
-    private Integer boss;
+    private Integer boss = 1;
     /**
      * worker线程数，如不设置，Netty框架中默认为2*CPU
      */

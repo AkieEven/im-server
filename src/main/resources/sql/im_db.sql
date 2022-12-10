@@ -31,11 +31,10 @@ primary key(user_id)
 /*好友关系表*/
 DROP TABLE IF EXISTS tb_friendship;
 CREATE TABLE tb_friendship(
-friendship_id BIGINT NOT NULL AUTO_INCREMENT,
 friendship_owner_id BIGINT NOT NULL,
 friendship_friend_id BIGINT NOT NULL,
 friendship_name VARCHAR(20) NOT NULL,
-PRIMARY KEY(friendship_id)
+PRIMARY KEY(friendship_owner_id,friendship_friend_id)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8mb4;
 
 /*群组管理暂时不使用*/

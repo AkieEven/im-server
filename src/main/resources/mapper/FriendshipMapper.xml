@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.van.im.dao.FriendshipMapper">
+    <resultMap id="BaseResultMap" type="tech.van.im.entity.Friendship">
+        <result column="friendship_owner_id" jdbcType="BIGINT" javaType="Long" property="friendshipOwnerId"/>
+        <result column="friendship_friend_id" jdbcType="BIGINT" javaType="Long" property="friendshipFriendId"/>
+        <result column="friendship_name" jdbcType="VARCHAR" javaType="String" property="friendshipName"/>
+    </resultMap>
+
+    <sql id = "BaseColumn">
+        friendship_id, friendship_owner_id, friendship_friend_id, friendship_name
+    </sql>
+
+    <insert id="save" parameterType="tech.van.im.entity.Friendship">
+        insert into tb_friendship (friendship_owner_id, friendship_friend_id, friendship_name)
+        values (#{friendshipOwnerId},#{friendshipFriendId},#{friendshipName})
+    </insert>
+
+    <select id="finaAllFriendById" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select friendship_friend_id from
+        tb_friendship
+        where friendship_owner_id = #{ownerId}
+    </select>
+    
+    <select id="selectByfriend"
+</mapper>

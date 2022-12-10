@@ -15,9 +15,11 @@ import tech.van.im.config.NettyConfig;
 public class NettyServerComponent {
 
     private final NettyConfig nettyConfig;
+    private final ServerChannelInitializer serverChannelInitializer;
 
-    public NettyServerComponent(final NettyConfig nettyConfig) {
+    public NettyServerComponent(final NettyConfig nettyConfig, final ServerChannelInitializer serverChannelInitializer) {
         this.nettyConfig = nettyConfig;
+        this.serverChannelInitializer = serverChannelInitializer;
     }
 
     @Bean
@@ -27,7 +29,7 @@ public class NettyServerComponent {
 
     @Bean
     public NioEventLoopGroup workerGroup() {
-        return new NioEventLoopGroup(nettyConfig.getWorker());
+        return nettyConfig.getWorker() == null ? new NioEventLoopGroup() : new NioEventLoopGroup(nettyConfig.getWorker());
     }
 
     @Bean
@@ -39,6 +41,7 @@ public class NettyServerComponent {
                 .option(ChannelOption.SO_BACKLOG,1024)
                 .childOption(ChannelOption.SO_KEEPALIVE,true)
                 .childOption(ChannelOption.TCP_NODELAY,true)
-                .childHandler();
+                .childHandler(serverChannelInitializer);
+        return serverBootstrap;
     }
 }

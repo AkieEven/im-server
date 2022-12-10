@@ -8,10 +8,19 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import tech.van.im.handler.HandlerFactory;
+import tech.van.im.handler.ServerHandler;
 import tech.van.im.transfer.MessageProtobuf;
 
-
+@Component
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
+
+    @Autowired
+    ServerHandler serverHandler;
+    @Autowired
+    HandlerFactory handlerFactory;
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -21,7 +30,9 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
         channelPipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(65535,0,2,0,2));
         channelPipeline.addLast(new ProtobufDecoder(MessageProtobuf.Msg.getDefaultInstance()));
         channelPipeline.addLast(new ProtobufEncoder());
+
+        handlerFactory.init();
         //业务handler
-        channelPipeline.addLast();
+        channelPipeline.addLast(serverHandler);
     }
 }
